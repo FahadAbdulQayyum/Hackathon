@@ -21,14 +21,22 @@ const Reader = data => {
     }, [])
     
     return (
-        <div>
+        <div
+        style={{
+            marginLeft:110,
+            marginRight:110
+        }}
+        >
             {/* {console.log('filteredD ****',filteredD)} */}
-            <h3 className='my-5'>Good Morning</h3>
+            <h2 className='my-5'><strong>Good Morning Readers!</strong></h2>
+            <h3 className='my-5'>All Blogs</h3>
             {/* {filteredD?.map(v =>  */}
             {blogData?.map(v => 
                 <div className="card pe-4 px-3 my-3">
                     <div className="form-group m-3 w-100 d-flex">
-                        <img src='https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg' />
+                        <img src='https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg' className='shadow' style={{
+                            borderRadius:30
+                        }} />
                         <div className="form-group m-3 w-100">
                             <h4>{v.title}</h4>
                             {/* <small><strong>{console.log('v.user', v.user)} - {'August 16th, 2023'}</strong></small> */}
