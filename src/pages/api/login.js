@@ -6,8 +6,11 @@ export default function handler(req, res) {
       const {body} = req;
       const data = logIn(body)
     //   const {firstName, lastName} = data[0];
-      const {firstName, lastName} = data;
+      const {firstName, lastName, password} = data;
     //   const filteredD = data.filter(d=>d.firstName === body.firstName)
+    if(password!==body.password){
+      throw new Error("Password Incorrect!")
+    }
       console.log('dataaa',data)
     //   console.log('filteredD',filteredD)
       return res.json({success:true, msg: "Successfully Login", detail:{firstName, lastName}})

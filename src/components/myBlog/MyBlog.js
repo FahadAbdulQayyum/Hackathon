@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import globalContext from '../contextApi/GlobalContext'
+import { message } from 'antd'
 
 const MyBlog = data => {
     const {user} = useContext(globalContext)
@@ -7,6 +8,25 @@ const MyBlog = data => {
     // console.log(data.blogs.filter(v=>v.user.firstName === user?.firstName),'****')
     console.log(data.blogs.map(v=>v.user?.firstName),'****', user?.firstName)
     const filteredD = data.blogs.filter(v=>v.user?.firstName === user?.firstName)
+
+    const deleteBlog = async data => {
+        console.log('delete Blog', data);
+        const res = await fetch("api/deleteBlog", {
+            method:"POST",
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        let resJson = await res.json();
+        console.log('resJson deleteBlog', resJson); 
+        message.success(resJson.msg)
+    }
+
+    const updateBlog = data => {
+        console.log('update Blog', data);
+    }
+    
     return (
         <div>
             {console.log('filteredD ****',filteredD)}
@@ -28,8 +48,8 @@ const MyBlog = data => {
                     </div>
 
                     <div className="form-group m-3">
-                        <button type="submit" className="btn btn-link mx-1">Delete</button>
-                        <button type="submit" className="btn btn-link ">Edit</button>
+                        <button type="submit" className="btn btn-link mx-1" onClick={() => deleteBlog(v.blog)}>Delete</button>
+                        <button type="submit" className="btn btn-link " onClick={() => updateBlog(v.blog)}>Edit</button>
                     </div>
                 </div>
             )

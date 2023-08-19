@@ -2,45 +2,63 @@ import React, { useContext, useEffect, useState } from 'react'
 import globalContext from '../contextApi/GlobalContext'
 
 const Reader = data => {
-    const {user} = useContext(globalContext)
+    const { user } = useContext(globalContext)
 
     const [blogData, setBlogData] = useState([]);
+    const [timeOfDay, setTimeOfDay] = useState();
 
     // console.log(data.blogs.map(v=>v.user.firstName),'****', user?.firstName)
     // const filteredD = data.blogs.filter(v=>v.user.firstName === user?.firstName)
 
-        useEffect(() => {
+    useEffect(() => {
         const fetchData = async () => {
             const res = await fetch('/api/login');
             const dataJson = await res.json();
 
-            console.log('daajon',dataJson.data)
+            console.log('daajon', dataJson.data)
             setBlogData(dataJson.data);
         }
+
+        const determineTimeOfDay = () => {
+            const currentHour = new Date().getHours();
+            let timeOfDay = '';
+
+            if (currentHour >= 6 && currentHour < 12) {
+                timeOfDay = 'Morning';
+            } else if (currentHour >= 12 && currentHour < 18) {
+                timeOfDay = 'Afternoon';
+            } else {
+                timeOfDay = 'Night';
+            }
+
+            setTimeOfDay(timeOfDay);
+        };
+
+        determineTimeOfDay();
         fetchData();
     }, [])
-    
+
     return (
         <div
-        style={{
-            marginLeft:110,
-            marginRight:110
-        }}
+            style={{
+                marginLeft: 110,
+                marginRight: 110
+            }}
         >
             {/* {console.log('filteredD ****',filteredD)} */}
-            <h2 className='my-5'><strong>Good Morning Readers!</strong></h2>
+            <h2 className='my-5'><strong>Good {timeOfDay} Readers!</strong></h2>
             <h3 className='my-5'>All Blogs</h3>
             {/* {filteredD?.map(v =>  */}
-            {blogData?.map(v => 
+            {blogData?.map(v =>
                 <div className="card pe-4 px-3 my-3">
                     <div className="form-group m-3 w-100 d-flex">
                         <img src='https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg' className='shadow' style={{
-                            borderRadius:30
+                            borderRadius: 30
                         }} />
                         <div className="form-group m-3 w-100">
                             <h4>{v.title}</h4>
                             {/* <small><strong>{console.log('v.user', v.user)} - {'August 16th, 2023'}</strong></small> */}
-                            <small><strong>{v.user?.firstName+' '+v?.user?.lastName} - {v.date}</strong></small>
+                            <small><strong>{v.user?.firstName + ' ' + v?.user?.lastName} - {v.date}</strong></small>
                         </div>
                     </div>
                     <div className="form-group m-3 w-100 grey">

@@ -44,3 +44,16 @@ export const writeBlog = (body) => {
     body = {...body, date}
     return fs.writeFileSync(pathJsonBlog, JSON.stringify([...data,body]))
 }
+
+export const deleteBlog = (body) => {
+    let data = readBlogs();
+    data = data.filter(d=>d.blog !== body)
+    return fs.writeFileSync(pathJsonBlog, JSON.stringify([...data]))
+}
+
+export const updateBlog = (body) => {
+    let data = readBlogs();
+    let targetData = data.filter(d=>d.blog === body)
+    data = data.filter(d=>d.blog !== body)
+    return fs.writeFileSync(pathJsonBlog, JSON.stringify([...data]))
+}
