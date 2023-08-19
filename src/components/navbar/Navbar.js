@@ -21,7 +21,6 @@ const Navbar = () => {
     const Logout = () => {
         Router?.push('/')
         window.location.reload()
-        
     }
 
     return (

@@ -39,6 +39,7 @@
   font-size: x-large;
 }
 
+.borderRadius,
 .shadow.borderRadius {
   border-radius: 30px;
 }

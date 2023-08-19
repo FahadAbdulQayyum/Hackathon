@@ -1,8 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react'
 import globalContext from '../contextApi/GlobalContext'
-import Router from 'next/router';
+// import Router from 'next/router';
+import {useRouter} from 'next/router';
 
 const Reader = data => {
+
+    const router = useRouter();
+    
     const { user, viewFilteredUserFunc } = useContext(globalContext)
 
     const [blogData, setBlogData] = useState([]);
@@ -42,7 +46,8 @@ const Reader = data => {
         let dataJson = jsonData.data
         dataJson = dataJson?.filter(v=> v.user.firstName===fn)
         viewFilteredUserFunc(dataJson)
-        Router.push('/readerSpecific')
+        // Router.push('/readerSpecific')
+        router.push('/readerSpecificPage')
     }
 
     return (
@@ -54,8 +59,8 @@ const Reader = data => {
         >
             <h2 className='my-5'><strong>Good {timeOfDay} Readers!</strong></h2>
             <h3 className='my-5'>All Blogs</h3>
-            {blogData?.map(v =>
-                <div className="card pe-4 px-3 my-3">
+            {blogData?.map((v,i) =>
+                <div key={i} className="card pe-4 px-3 my-3">
                     <div className="form-group m-3 w-100 d-flex">
                         <img src='https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg' className='shadow' style={{
                             borderRadius: 30
