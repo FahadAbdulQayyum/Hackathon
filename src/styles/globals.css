@@ -1,0 +1,49 @@
+:root {
+  --primary-color: #7749F8;
+}
+
+.purple-clr {
+  /* background-color: #5227CC; */
+  background-color: var(--primary-color);
+}
+
+.btn-purple {
+  background-color: var(--primary-color) !important;
+  color: white !important;
+  font-weight: 500 !important;
+}
+
+/* .bottom-shadow {
+  border-bottom: 1px solid lightgray;
+} */
+
+.font-weight {
+  font-weight: 100 !important;
+}
+
+.form-group.m-3.w-100.d-flex img {
+  height: 100px;
+  border-radius: 20px;
+}
+
+.form-group.m-3.w-100.d-flex  small {
+  color: gray;
+}
+
+.btn-link {
+  text-decoration: none !important;
+  color: var(--primary-color) !important;
+}
+
+.form-group.m-3.w-100.grey {
+  color: grey !important;
+}
+
+.iconClr {
+  color: var(--primary-color) !important;
+  font-size: x-large;
+}
+
+.shadow.borderRadius {
+  border-radius: 30px;
+}
