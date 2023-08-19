@@ -1,9 +1,22 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import globalContext from '../contextApi/GlobalContext';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 const Navbar = () => {
-    const { login, Login, dashboard, Dashboard, showProfileFunc } = useContext(globalContext);
+
+    const router = useRouter
+
+    const [prevData, setPrevData] = useState()
+
+    const { login, Login, dashboard, Dashboard, showProfileFunc, user } = useContext(globalContext);
+    
+     useEffect(() => {
+        console.log('navrouterrr',router.query)
+        setPrevData(router.query)
+        console.log('userDetail', user)
+    },[])
+    
     return (
         <nav className="navbar navbar-expand-lg navbar-light purple-clr">
             <div className="container">

@@ -2,9 +2,15 @@ import fs from 'fs';
 import path from 'path';
 
 const pathJson = path.join(process.cwd(), "src" , "data", "db.json")
+const pathJsonBlog = path.join(process.cwd(), "src" , "data", "blogDb.json")
 
 export const readUser = () => {
     const fsRead = fs.readFileSync(pathJson)
+    return JSON.parse(fsRead);
+}
+
+export const readBlogs = () => {
+    const fsRead = fs.readFileSync(pathJsonBlog)
     return JSON.parse(fsRead);
 }
 
@@ -29,4 +35,9 @@ export const logIn = (body) => {
         // throw new Error("Successfully login")
         return "Successfully Login"
     }
+}
+
+export const writeBlog = (body) => {
+    const data = readBlogs();
+    return fs.writeFileSync(pathJsonBlog, JSON.stringify([...data,body]))
 }

@@ -2,10 +2,13 @@ import React, { useContext, useRef, useState } from 'react'
 import Dashboard from '../dashboard/Dashboard'
 import globalContext from '../contextApi/GlobalContext'
 import { message } from 'antd';
+import { useRouter } from 'next/router';
 
 const Login = () => {
 
-    const { Dashboard } = useContext(globalContext);
+    const router = useRouter();
+
+    const { Dashboard, userDetail } = useContext(globalContext);
 
     const [isValidEmail, setIsValidEmail] = useState(false)
     const [emailV, setEmailV] = useState('')
@@ -41,7 +44,12 @@ const Login = () => {
         }
         message.loading()
         message.success(jsonData.msg)
-        Dashboard();
+        // router.history(formData)
+        router.push('/dashboardPage')
+        userDetail(formData)
+        // router.push({pathname:'/navPage', query:formData})
+        // router.push({pathname:'/dashboardPage', query:formData})
+        // Dashboard();
     }
 
 

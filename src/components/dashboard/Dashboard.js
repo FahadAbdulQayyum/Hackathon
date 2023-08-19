@@ -1,22 +1,32 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import MyBlog from '../myBlog/MyBlog'
+import { message } from 'antd';
+import { useRouter } from 'next/router';
 
 const Dashboard = () => {
 
-    const [blogArea, setBlogArea] = useState('')
-    const [blogTitle, setBlogTitle] = useState('')
+    const router = useRouter();
 
     const titleRef = useRef();
     const blogRef = useRef();
 
+    const [blogArea, setBlogArea] = useState('')
+    const [blogTitle, setBlogTitle] = useState('')
+    const [prevData, setPrevData] = useState()
+
+    useEffect(() => {
+        console.log('routerrr',router.query)
+        setPrevData(router.query)
+    },[])
+
     const handleSubmit = async e => {
         e.preventDefault();
         const formData = {
-            email: emailRef.current.value,
-            password: passwordRef.current.value,
+            title: titleRef.current.value,
+            blog: blogRef.current.value,
         };
         console.log('formData', formData)
-        const res = await fetch('/api/login', {
+        const res = await fetch('/api/submitBlog', {
             method: "POST",
             body: JSON.stringify(formData),
             headers: {
@@ -50,7 +60,7 @@ const Dashboard = () => {
                         <form onSubmit={handleSubmit} className="m-auto px-5 flex-column justify-content-center align-items-center shadow py-5">
                             <div className="form-group m-3 w-100">
                                 {/* <input type="email" className="form-control" ref={titleRef} id="email" placeholder="Placeholder" minLength={5} maxLength={50} required/> */}
-                                <input type="email" 
+                                <input type="text" 
                                 className={`form-control ${(blogTitle.length > 5 && blogTitle.length < 50) ? 'is-valid' : 'is-invalid'}`}
                                 onChange={() => setBlogTitle(titleRef.current.value)}
                                 ref={titleRef} id="email" placeholder="Placeholder" required/>

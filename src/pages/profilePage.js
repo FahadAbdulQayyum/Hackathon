@@ -7,7 +7,6 @@ const profilePage = () => {
     const router = useRouter()
     useEffect(() => {
         console.log('useEffecttttt', router)
-        router.push('/')
       },[])
     
     return (

@@ -1,11 +1,8 @@
 import React, { useContext, useRef, useState } from 'react'
 import globalContext from '../contextApi/GlobalContext'
-import { useRouter } from 'next/router';
 import { message } from 'antd';
 
 const SignUp = () => {
-
-    const router = useRouter();
 
     const [password, setPassword] = useState('');
     const [passwordPass, setPasswordPass] = useState(false);

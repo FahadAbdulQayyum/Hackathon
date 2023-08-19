@@ -1,4 +1,4 @@
-import { INCREMENT, LOGIN, SET_DASHBOARD, SHOW_PROFILE } from "./types";
+import { INCREMENT, LOGIN, SET_DASHBOARD, SHOW_PROFILE, USER_DETAIL } from "./types";
 
 const GlobalReducer = (state, action) => {
   switch (action.type) {
@@ -25,6 +25,12 @@ const GlobalReducer = (state, action) => {
       return {
         ...state,
         showProfile: !state.showProfile
+      }
+    }
+    case USER_DETAIL: {
+      return {
+        ...state,
+        user: action.payload
       }
     }
     default:
