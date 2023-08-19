@@ -1,15 +1,17 @@
-import { logIn, signUp } from "@/services/Services";
+import { logIn, readBlogs, signUp } from "@/services/Services";
 
 export default function handler(req, res) {
   try {
     if(req.method === "POST") {
       const {body} = req;
-      logIn(body)
-      return res.json({success:true, msg: "Successfully Login"})
-      // console.log('body', body);
+      const data = logIn(body)
+      const {firstName, lastName} = data[0];
+      return res.json({success:true, msg: "Successfully Login", detail:{firstName, lastName}})
     } 
   } catch (err) {
     return res.json({msg:err.message, success:false})
     }
-  res.status(200).json({ name: 'John Doe' })
+    const data = readBlogs()
+    console.log('dataBlog',data)
+    return res.json({data})
 }

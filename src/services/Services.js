@@ -33,8 +33,9 @@ export const logIn = (body) => {
     console.log('matched',matched);
     if(matched) {
         // throw new Error("Successfully login")
-        return "Successfully Login"
+        return data
     }
+    throw new Error("Invalid Credentials")
 }
 
 export const writeBlog = (body) => {

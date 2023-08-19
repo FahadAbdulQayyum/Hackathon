@@ -43,13 +43,14 @@ const Login = () => {
             return message.error(jsonData.msg)
         }
         message.loading()
+        console.log('jsonData', jsonData)
         message.success(jsonData.msg)
         // router.history(formData)
         router.push('/dashboardPage')
-        userDetail(formData)
+        userDetail(jsonData.detail)
         // router.push({pathname:'/navPage', query:formData})
         // router.push({pathname:'/dashboardPage', query:formData})
-        // Dashboard();
+        Dashboard();
     }
 
 

@@ -1,29 +1,38 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import MyBlog from '../myBlog/MyBlog'
 import { message } from 'antd';
 import { useRouter } from 'next/router';
+import globalContext from '../contextApi/GlobalContext';
 
 const Dashboard = () => {
 
-    const router = useRouter();
+    const { user } = useContext(globalContext);
+
+    const [blogArea, setBlogArea] = useState('')
+    const [blogTitle, setBlogTitle] = useState('')
+
+    const [blogData, setBlogData] = useState([]);
 
     const titleRef = useRef();
     const blogRef = useRef();
 
-    const [blogArea, setBlogArea] = useState('')
-    const [blogTitle, setBlogTitle] = useState('')
-    const [prevData, setPrevData] = useState()
-
     useEffect(() => {
-        console.log('routerrr',router.query)
-        setPrevData(router.query)
-    },[])
+        const fetchData = async () => {
+            const res = await fetch('/api/login');
+            const dataJson = await res.json();
+
+            console.log('daajon',dataJson.data)
+            setBlogData(dataJson.data);
+        }
+        fetchData();
+    }, [])
 
     const handleSubmit = async e => {
         e.preventDefault();
         const formData = {
             title: titleRef.current.value,
             blog: blogRef.current.value,
+            user
         };
         console.log('formData', formData)
         const res = await fetch('/api/submitBlog', {
@@ -60,22 +69,22 @@ const Dashboard = () => {
                         <form onSubmit={handleSubmit} className="m-auto px-5 flex-column justify-content-center align-items-center shadow py-5">
                             <div className="form-group m-3 w-100">
                                 {/* <input type="email" className="form-control" ref={titleRef} id="email" placeholder="Placeholder" minLength={5} maxLength={50} required/> */}
-                                <input type="text" 
-                                className={`form-control ${(blogTitle.length > 5 && blogTitle.length < 50) ? 'is-valid' : 'is-invalid'}`}
-                                onChange={() => setBlogTitle(titleRef.current.value)}
-                                ref={titleRef} id="email" placeholder="Placeholder" required/>
+                                <input type="text"
+                                    className={`form-control ${(blogTitle.length > 5 && blogTitle.length < 50) ? 'is-valid' : 'is-invalid'}`}
+                                    onChange={() => setBlogTitle(titleRef.current.value)}
+                                    ref={titleRef} id="email" placeholder="Placeholder" required />
                             </div>
                             <div className="form-group m-3 w-100">
                                 {/* <input type="password" className="form-control" id="email" placeholder="What is in your mind" /> */}
                                 {/* <textarea rows={5} type="password" className="form-control" id="email" placeholder="What is in your mind" minLength={100} maxLength={3000} required/> */}
-                                <textarea rows={5} type="password" ref={blogRef} className={`form-control ${(blogArea.length > 100 && blogArea.length < 3000) ? 'is-valid' : 'is-invalid'}`} id="email" placeholder="What is in your mind" onChange={() => setBlogArea(blogRef.current.value)} required/>
+                                <textarea rows={5} type="password" ref={blogRef} className={`form-control ${(blogArea.length > 100 && blogArea.length < 3000) ? 'is-valid' : 'is-invalid'}`} id="email" placeholder="What is in your mind" onChange={() => setBlogArea(blogRef.current.value)} required />
                             </div>
                             {/* <!-- Other form inputs here --> */}
                             <div className="form-group m-3">
                                 <button type="submit" className="btn btn-purple">Publish Blog</button>
                             </div>
                         </form>
-                        <MyBlog />
+                        <MyBlog blogs={blogData}/>
                     </div>
 
                 </div>

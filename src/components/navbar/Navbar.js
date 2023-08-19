@@ -13,8 +13,8 @@ const Navbar = () => {
     
      useEffect(() => {
         console.log('navrouterrr',router.query)
-        setPrevData(router.query)
         console.log('userDetail', user)
+        setPrevData(user)
     },[])
     
     return (
@@ -35,7 +35,8 @@ const Navbar = () => {
                             ?
                             <span className='d-flex'>
                             {/* <a className="nav-link text-light font-weight" onClick={showProfileFunc} href="#">Profile Name</a> */}
-                            <Link className="nav-link text-light font-weight" onClick={showProfileFunc} href="/profilePage">Profile Name</Link>
+                            {/* <Link className="nav-link text-light font-weight" onClick={showProfileFunc} href="/profilePage">{prevData?.length>1 ? prevData?.email : 'user'}</Link> */}
+                            <Link className="nav-link text-light font-weight" onClick={showProfileFunc} href="/profilePage">{user?.firstName+' '+user?.lastName}</Link>
                             <a className="nav-link text-light" onClick={Dashboard} href="javascript:void(0)"><strong>Logout</strong></a>
                             </span>
                             :
