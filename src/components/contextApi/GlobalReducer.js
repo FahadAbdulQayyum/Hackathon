@@ -1,4 +1,4 @@
-import { INCREMENT, LOGIN, SET_DASHBOARD, SHOW_PROFILE, USER_DETAIL } from "./types";
+import { INCREMENT, LOGIN, SET_DASHBOARD, SHOW_PROFILE, SIGN_UP, USER_DETAIL } from "./types";
 
 const GlobalReducer = (state, action) => {
   switch (action.type) {
@@ -12,7 +12,16 @@ const GlobalReducer = (state, action) => {
       return {
         ...state,
         login: !state.login,
-        profile: false
+        profile: false,
+        reader: false
+      }
+    }
+    case SIGN_UP: {
+      return {
+        ...state,
+        login: !state.login,
+        profile: false,
+        reader: false
       }
     }
     case SET_DASHBOARD: {

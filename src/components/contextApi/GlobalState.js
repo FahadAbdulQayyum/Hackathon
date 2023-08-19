@@ -1,4 +1,4 @@
-import { INCREMENT, LOGIN, SET_DASHBOARD, SHOW_PROFILE, USER_DETAIL } from "./types";
+import { INCREMENT, LOGIN, SET_DASHBOARD, SHOW_PROFILE, SIGN_UP, USER_DETAIL } from "./types";
 import { useReducer } from "react";
 import globalReducer from "./GlobalReducer";
 import globalContext from "./GlobalContext";
@@ -6,10 +6,11 @@ import globalContext from "./GlobalContext";
 const GlobalState = (props) => {
   const initialState = {
     quantity: 0,
-    login: true,
+    login: false,
     dashboard: false,
     showProfile: false,
     user:null,
+    reader: true,
   };
 
   const [state, dispatch] = useReducer(globalReducer, initialState);
@@ -24,6 +25,14 @@ const GlobalState = (props) => {
     dispatch({
       type: LOGIN
     })
+    console.log('login access')
+  }
+
+  const Signup = () => {
+    dispatch({
+      type: SIGN_UP
+    })
+    console.log('login access')
   }
 
   const Dashboard = () => {
@@ -56,11 +65,13 @@ const GlobalState = (props) => {
         Dashboard,
         showProfileFunc,
         userDetail,
+        Signup,
         quantity: state.quantity,
         login: state.login,
         dashboard: state.dashboard,
         showProfile: state.showProfile,
-        user: state.user
+        user: state.user,
+        reader: state.reader
       }}
     >
       {props.children}

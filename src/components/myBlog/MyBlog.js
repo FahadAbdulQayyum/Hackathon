@@ -1,6 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import globalContext from '../contextApi/GlobalContext'
 
 const MyBlog = data => {
+    const {user} = useContext(globalContext)
+    // data = data.blogs.filter(v=>v.user.firstName === user?.firstName)
+    console.log(data.blogs.filter(v=>v.user.firstName === user?.firstName),'****')
     return (
         <div>
             {console.log('datad',data.blogs)}

@@ -9,7 +9,7 @@ const Navbar = () => {
 
     const [prevData, setPrevData] = useState()
 
-    const { login, Login, dashboard, Dashboard, showProfileFunc, user } = useContext(globalContext);
+    const { login, Login, Signup, dashboard, Dashboard, showProfileFunc, user } = useContext(globalContext);
     
      useEffect(() => {
         console.log('navrouterrr',router.query)
@@ -40,7 +40,7 @@ const Navbar = () => {
                             <a className="nav-link text-light" onClick={Dashboard} href="javascript:void(0)"><strong>Logout</strong></a>
                             </span>
                             :
-                            <a className="nav-link text-light" onClick={Login} href="javascript:void(0)"><strong>Signup</strong></a>
+                            <a className="nav-link text-light" onClick={Signup} href="javascript:void(0)"><strong>Signup</strong></a>
                             :
                             <a className="nav-link text-light" onClick={Login} href="javascript:void(0)"><strong>Login</strong></a>
 
