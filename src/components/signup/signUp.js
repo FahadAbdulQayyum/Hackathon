@@ -49,7 +49,6 @@ const SignUp = () => {
             }
         })
         const jsonData = await res.json();
-        console.log('jsonData', jsonData);
         if (!jsonData.success) {
             return message.error(jsonData.msg)
         }
@@ -81,18 +80,14 @@ const SignUp = () => {
                                 <input type="email" className="form-control" id="email" placeholder="Email" ref={emailRef} required />
                             </div>
                             <div className="form-group m-3 w-75">
-                                {/* <input type="password" className="form-control" id="email" placeholder="Password" ref={passwordRef} required minLength={8}/> */}
                                 <input type="password" className={`form-control ${password.length > 0 && passwordPass ? 'is-valid' : 'is-invalid'}`}
                                     id="password" placeholder="Password" ref={passwordRef} onChange={() => (setPassword(passwordRef.current.value), checkPasswordComplexity())} required minLength={8} />
                             </div>
                             <div className="form-group m-3 w-75">
-                                {/* <input type="password" className="form-control" id="email" placeholder="Repeat Password" ref={repeatPasswordRef}/> */}
                                 <input type="password" className={`form-control ${password.length > 0 && (password === matchedPasswordV) ? 'is-valid' : 'is-invalid'}`}
                                     id="repeatpassword" placeholder="Repeat Password" ref={repeatPasswordRef} onChange={() => (setMatchedPasswordV(repeatPasswordRef.current.value), passwordMatch())} required minLength={8} />
                             </div>
-                            {/* <!-- Other form inputs here --> */}
                             <div className="form-group m-3">
-                                {/* <button type="submit" className="btn btn-purple" onClick={Login}>Signup</button> */}
                                 <button type="submit" className="btn btn-purple" >Signup</button>
                             </div>
                         </form>

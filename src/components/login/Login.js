@@ -1,5 +1,4 @@
 import React, { useContext, useRef, useState } from 'react'
-import Dashboard from '../dashboard/Dashboard'
 import globalContext from '../contextApi/GlobalContext'
 import { message } from 'antd';
 import { useRouter } from 'next/router';
@@ -18,7 +17,6 @@ const Login = () => {
 
     const emailValidFunc = () => {
         const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-        // const isValidEmail = emailRegex.test(emailV);
         setIsValidEmail(emailRegex.test(emailV))
         return isValidEmail;
     }
@@ -29,7 +27,6 @@ const Login = () => {
             email: emailRef.current.value,
             password: passwordRef.current.value,
         };
-        console.log('formData', formData)
         const res = await fetch('/api/login', {
             method: "POST",
             body: JSON.stringify(formData),
@@ -38,18 +35,13 @@ const Login = () => {
             }
         })
         const jsonData = await res.json();
-        // console.log('jsonDataa', jsonData);
         if (!jsonData.success) {
             return message.error(jsonData.msg)
         }
         message.loading()
-        console.log('jsonDataaaa', jsonData)
         message.success(jsonData.msg)
-        // router.history(formData)
         router.push('/dashboardPage')
         userDetail(jsonData.detail)
-        // router.push({pathname:'/navPage', query:formData})
-        // router.push({pathname:'/dashboardPage', query:formData})
         Dashboard();
     }
 
@@ -75,12 +67,10 @@ const Login = () => {
                                 ref={emailRef}
                                 />
 
-                                {/* <input type="email" className="form-control" id="email" placeholder="Email" ref={emailRef} required /> */}
                             </div>
                             <div className="form-group m-3 w-75">
                                 <input type="password" className="form-control" id="email" placeholder="Password" ref={passwordRef} required />
                             </div>
-                            {/* <!-- Other form inputs here --> */}
                             <div className="form-group m-3">
                                 <button type="submit" className="btn btn-purple" >Login</button>
                             </div>

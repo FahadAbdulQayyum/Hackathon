@@ -41,8 +41,6 @@ const Navbar = () => {
                             dashboard 
                             ?
                             <span className='d-flex'>
-                            {/* <a className="nav-link text-light font-weight" onClick={showProfileFunc} href="#">Profile Name</a> */}
-                            {/* <Link className="nav-link text-light font-weight" onClick={showProfileFunc} href="/profilePage">{prevData?.length>1 ? prevData?.email : 'user'}</Link> */}
                             <Link className="nav-link text-light font-weight" onClick={showProfileFunc} href="/profilePage">{user?.firstName+' '+user?.lastName}</Link>
                             <a className="nav-link text-light" onClick={Logout} href="javascript:void(0)"><strong>Logout</strong></a>
                             </span>

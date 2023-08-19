@@ -40,7 +40,6 @@ const Profile = () => {
                                     <input type="password" className="form-control my-4" id="new_pass" placeholder="New Password" />
                                     <input type="password" className="form-control my-4" id="repeat_pass" placeholder="Repeat Password" />
                                 </div>
-                                {/* <!-- Other form inputs here --> */}
                                 <div className="form-group m-3">
                                     <button type="submit" className="btn btn-purple">Update Password</button>
                                 </div>
