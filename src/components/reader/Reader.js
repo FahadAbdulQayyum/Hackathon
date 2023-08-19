@@ -1,8 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react'
 import globalContext from '../contextApi/GlobalContext'
+import ReaderSpecific from './ReaderSpecific';
+// import { Router } from 'next/router';
+import Router from 'next/router';
 
 const Reader = data => {
-    const { user } = useContext(globalContext)
+    const { user, viewFilteredUserFunc } = useContext(globalContext)
 
     const [blogData, setBlogData] = useState([]);
     const [timeOfDay, setTimeOfDay] = useState();
@@ -38,6 +41,18 @@ const Reader = data => {
         fetchData();
     }, [])
 
+    const whichUser = async (fn, ln) => {
+        const res = await fetch('/api/submitBlog')
+        const jsonData = await res.json();
+        let dataJson = jsonData.data
+        // jsonData = jsonData?.filter(v=> v.user.firstName===fn)
+        dataJson = dataJson?.filter(v=> v.user.firstName===fn)
+        console.log('whichuser', dataJson)
+        viewFilteredUserFunc(dataJson)
+        Router.push('/readerSpecific')
+        // router.push('/readerSpecific')
+    }
+
     return (
         <div
             style={{
@@ -68,7 +83,7 @@ const Reader = data => {
                     </div>
 
                     <div className="form-group m-3">
-                        <button type="submit" className="btn btn-link mx-1">See all from this user</button>
+                        <button type="submit" className="btn btn-link mx-1" onClick={() => whichUser(v.user.firstName, v.user.lastName)}>See all from this user</button>
                     </div>
                 </div>
             )

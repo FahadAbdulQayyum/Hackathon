@@ -1,4 +1,4 @@
-import { INCREMENT, LOGIN, SET_DASHBOARD, SHOW_PROFILE, SIGN_UP, USER_DETAIL } from "./types";
+import { INCREMENT, LOGIN, SET_DASHBOARD, SHOW_PROFILE, SIGN_UP, USER_DETAIL, VIEW_USER } from "./types";
 import { useReducer } from "react";
 import globalReducer from "./GlobalReducer";
 import globalContext from "./GlobalContext";
@@ -11,6 +11,7 @@ const GlobalState = (props) => {
     showProfile: false,
     user:null,
     reader: true,
+    viewFilteredUser: null,
   };
 
   const [state, dispatch] = useReducer(globalReducer, initialState);
@@ -57,6 +58,13 @@ const GlobalState = (props) => {
     console.log('userDtail functino called')
   }
 
+  const viewFilteredUserFunc = data => {
+    dispatch({
+      type: VIEW_USER,
+      payload: data
+    })
+  }
+  
   return (
     <globalContext.Provider
       value={{
@@ -66,12 +74,14 @@ const GlobalState = (props) => {
         showProfileFunc,
         userDetail,
         Signup,
+        viewFilteredUserFunc,
         quantity: state.quantity,
         login: state.login,
         dashboard: state.dashboard,
         showProfile: state.showProfile,
         user: state.user,
-        reader: state.reader
+        reader: state.reader,
+        viewFilteredUser: state.viewFilteredUser
       }}
     >
       {props.children}
