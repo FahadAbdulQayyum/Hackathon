@@ -38,12 +38,12 @@ const Login = () => {
             }
         })
         const jsonData = await res.json();
-        console.log('jsonData', jsonData);
+        // console.log('jsonDataa', jsonData);
         if (!jsonData.success) {
             return message.error(jsonData.msg)
         }
         message.loading()
-        console.log('jsonData', jsonData)
+        console.log('jsonDataaaa', jsonData)
         message.success(jsonData.msg)
         // router.history(formData)
         router.push('/dashboardPage')

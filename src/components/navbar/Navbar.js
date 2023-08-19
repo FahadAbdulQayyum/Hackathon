@@ -13,7 +13,7 @@ const Navbar = () => {
     
      useEffect(() => {
         console.log('navrouterrr',router.query)
-        console.log('userDetail', user)
+        console.log('userDetaillll', user)
         setPrevData(user)
     },[])
     

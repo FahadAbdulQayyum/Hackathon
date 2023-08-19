@@ -45,11 +45,12 @@ const Dashboard = () => {
         const jsonData = await res.json();
         console.log('jsonData', jsonData);
         if (!jsonData.success) {
-            return message.error(jsonData.msg)
+            return message.error(jsonData?.msg)
         }
         message.loading()
-        message.success(jsonData.msg)
-        Dashboard();
+        message.success(jsonData?.msg)
+        titleRef.current.value = ""        
+        blogRef.current.value = ""
     }
 
 

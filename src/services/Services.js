@@ -33,12 +33,13 @@ export const logIn = (body) => {
     console.log('matched',matched);
     if(matched) {
         // throw new Error("Successfully login")
-        return data
+        return matched
     }
     throw new Error("Invalid Credentials")
 }
 
 export const writeBlog = (body) => {
     const data = readBlogs();
-    return fs.writeFileSync(pathJsonBlog, JSON.stringify([...data,body]))
+    const date = (new Date()).toLocaleDateString('en-GB')
+    return fs.writeFileSync(pathJsonBlog, JSON.stringify([...data,body, {date}]))
 }
