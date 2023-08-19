@@ -1,22 +1,29 @@
 import React, { useContext, useEffect, useState } from 'react';
 import globalContext from '../contextApi/GlobalContext';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+// import { useRouter, Router } from 'next/router';
+import Router from 'next/router';
 
 const Navbar = () => {
 
-    const router = useRouter
+    // const router = useRouter
 
     const [prevData, setPrevData] = useState()
 
     const { login, Login, Signup, dashboard, Dashboard, showProfileFunc, user } = useContext(globalContext);
     
      useEffect(() => {
-        console.log('navrouterrr',router.query)
+        // console.log('navrouterrr',router.query)
         console.log('userDetaillll', user)
         setPrevData(user)
     },[])
-    
+
+    const Logout = () => {
+        Router?.push('/')
+        window.location.reload()
+        
+    }
+
     return (
         <nav className="navbar navbar-expand-lg navbar-light purple-clr">
             <div className="container">
@@ -37,7 +44,7 @@ const Navbar = () => {
                             {/* <a className="nav-link text-light font-weight" onClick={showProfileFunc} href="#">Profile Name</a> */}
                             {/* <Link className="nav-link text-light font-weight" onClick={showProfileFunc} href="/profilePage">{prevData?.length>1 ? prevData?.email : 'user'}</Link> */}
                             <Link className="nav-link text-light font-weight" onClick={showProfileFunc} href="/profilePage">{user?.firstName+' '+user?.lastName}</Link>
-                            <a className="nav-link text-light" onClick={Dashboard} href="javascript:void(0)"><strong>Logout</strong></a>
+                            <a className="nav-link text-light" onClick={Logout} href="javascript:void(0)"><strong>Logout</strong></a>
                             </span>
                             :
                             <a className="nav-link text-light" onClick={Signup} href="javascript:void(0)"><strong>Signup</strong></a>

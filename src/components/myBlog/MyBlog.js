@@ -18,7 +18,7 @@ const MyBlog = data => {
                         <img src='https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg' />
                         <div className="form-group m-3 w-100">
                             <h4>{v.title}</h4>
-                            <small><strong>{v.user?.firstName+' '+v.user?.lastName} - August 16th, 2023</strong></small>
+                            <small><strong>{v.user?.firstName+' '+v.user?.lastName} - {v.date}</strong></small>
                         </div>
                     </div>
                     <div className="form-group m-3 w-100 grey">

@@ -41,5 +41,6 @@ export const logIn = (body) => {
 export const writeBlog = (body) => {
     const data = readBlogs();
     const date = (new Date()).toLocaleDateString('en-GB')
-    return fs.writeFileSync(pathJsonBlog, JSON.stringify([...data,body, {date}]))
+    body = {...body, date}
+    return fs.writeFileSync(pathJsonBlog, JSON.stringify([...data,body]))
 }
