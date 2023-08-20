@@ -22,7 +22,6 @@ const Login = () => {
         console.log('login user if avaialbel',user);
         DashboardFalse();
         user!==null && onLogin()
-        // user && (message.loading(), onLogin(), Login())
     },[])
 
     const emailValidFunc = () => {

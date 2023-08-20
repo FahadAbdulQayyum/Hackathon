@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
 import globalContext from '../contextApi/GlobalContext'
-// import Router from 'next/router';
 import {useRouter} from 'next/router';
 
 const Reader = data => {
@@ -19,7 +18,6 @@ const Reader = data => {
 
             console.log('daajon', dataJson.data)
             setBlogData(dataJson.data);
-            // Dashboard()
             DashboardFalse()
         }
 
@@ -48,7 +46,6 @@ const Reader = data => {
         let dataJson = jsonData.data
         dataJson = dataJson?.filter(v=> v.user.firstName===fn)
         viewFilteredUserFunc(dataJson)
-        // Router.push('/readerSpecific')
         router.push('/readerSpecificPage')
     }
 

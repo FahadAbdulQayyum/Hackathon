@@ -1,4 +1,3 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
 import { signUp } from "@/services/Services";
 
@@ -8,7 +7,6 @@ export default function handler(req, res) {
       const {body} = req;
       signUp(body)
       return res.json({success:true, msg: "Successfully Registered"})
-      // console.log('body', body);
     } 
   } catch (err) {
     return res.json({msg:err.message, success:false})

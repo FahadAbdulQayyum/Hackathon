@@ -6,16 +6,13 @@ import globalContext from "./GlobalContext";
 const GlobalState = (props) => {
   let storageData = 0;
   useEffect(() => {
-    // storageData = JSON.parse(localStorage.getItem('userDetail'))
     state.user = JSON.parse(localStorage.getItem('userDetail'))
-    console.log('storageData', storageData)
   }, [])
   const initialState = {
     login: false,
     signup:true,
     dashboard: false,
     showProfile: false,
-    // user: storageData?.length ? storageData : null,
     user: null,
     reader: true,
     viewFilteredUser: null,

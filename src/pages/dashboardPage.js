@@ -1,15 +1,8 @@
 import Dashboard from '@/components/dashboard/Dashboard'
 import Navbar from '@/components/navbar/Navbar'
-import { useRouter } from 'next/router'
-import React, { useEffect } from 'react'
+import React from 'react'
 
 const dashboardPage = () => {
-
-    // const router = useRouter();
-
-    // useEffect(() => {
-    //     rou
-    // })
 
   return (
     <>

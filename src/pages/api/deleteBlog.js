@@ -11,6 +11,5 @@ export default function handler(req, res) {
     return res.json({msg:err.message, success:false})
     }
     const data = readBlogs()
-    // console.log('dataBlog',data)
     return res.json({data})
 }

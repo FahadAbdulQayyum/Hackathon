@@ -17,10 +17,6 @@ const SignUp = () => {
 
     const { Login, Signup } = useContext(globalContext);
 
-    // useEffect(() => {
-    //     Signup()
-    // },[])
-
     const checkPasswordComplexity = () => {
         const hasUppercase = /[A-Z]/.test(password);
         const hasLowercase = /[a-z]/.test(password);

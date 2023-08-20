@@ -22,7 +22,6 @@ const Profile = () => {
                                         <p className='position-absolute bottom-0 start-100' style={{
                                             marginBottom: 30,
                                             marginLeft: 15
-                                            // marginLeft: 125
                                         }}>
                                             <BsPencilFill className='iconClr' />
                                         </p>

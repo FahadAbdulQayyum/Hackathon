@@ -10,7 +10,6 @@ const GlobalReducer = (state, action) => {
         signup: !state.signup,
         profile: false,
         reader: false,
-        // dashboard:true
       }
     }
     case SIGN_UP: {
@@ -24,14 +23,12 @@ const GlobalReducer = (state, action) => {
     case SET_DASHBOARD: {
       return {
         ...state,
-        // dashboard: !state.dashboard
         dashboard: true
       }
     }
     case SET_DASHBOARD_FALSE: {
       return {
         ...state,
-        // dashboard: !state.dashboard
         dashboard: false
       }
     }
