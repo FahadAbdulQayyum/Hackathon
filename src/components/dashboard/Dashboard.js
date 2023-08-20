@@ -5,7 +5,7 @@ import globalContext from '../contextApi/GlobalContext';
 
 const Dashboard = () => {
 
-    const { user } = useContext(globalContext);
+    const { user, Dashboard, Login } = useContext(globalContext);
 
     const [blogArea, setBlogArea] = useState('')
     const [blogTitle, setBlogTitle] = useState('')
@@ -23,6 +23,7 @@ const Dashboard = () => {
             setBlogData(dataJson.data);
         }
         fetchData();
+        user && Dashboard()
     }, [])
 
     const handleSubmit = async e => {

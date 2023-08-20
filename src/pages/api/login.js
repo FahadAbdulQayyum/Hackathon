@@ -1,24 +1,20 @@
-import { logIn, readBlogs, signUp } from "@/services/Services";
+import { logIn, readBlogs } from "@/services/Services";
 
 export default function handler(req, res) {
   try {
-    if(req.method === "POST") {
-      const {body} = req;
+    if (req.method === "POST") {
+      const { body } = req;
       const data = logIn(body)
-    //   const {firstName, lastName} = data[0];
-      const {firstName, lastName, password} = data;
-    //   const filteredD = data.filter(d=>d.firstName === body.firstName)
-    if(password!==body.password){
-      throw new Error("Password Incorrect!")
+      const { firstName, lastName, password } = data;
+      if (password !== body.password) {
+        throw new Error("Password Incorrect!")
+      }
+      console.log('dataaa', data)
+      return res.json({ success: true, msg: "Successfully Login", detail: { firstName, lastName } })
     }
-      console.log('dataaa',data)
-    //   console.log('filteredD',filteredD)
-      return res.json({success:true, msg: "Successfully Login", detail:{firstName, lastName}})
-    } 
   } catch (err) {
-    return res.json({msg:err.message, success:false})
-    }
-    const data = readBlogs()
-    // console.log('dataBlog',data)
-    return res.json({data})
+    return res.json({ msg: err.message, success: false })
+  }
+  const data = readBlogs()
+  return res.json({ data })
 }

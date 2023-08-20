@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import globalContext from '../contextApi/GlobalContext'
 import { message } from 'antd';
 
@@ -15,7 +15,11 @@ const SignUp = () => {
     const passwordRef = useRef();
     const repeatPasswordRef = useRef();
 
-    const { Login } = useContext(globalContext);
+    const { Login, Signup } = useContext(globalContext);
+
+    // useEffect(() => {
+    //     Signup()
+    // },[])
 
     const checkPasswordComplexity = () => {
         const hasUppercase = /[A-Z]/.test(password);

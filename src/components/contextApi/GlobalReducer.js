@@ -1,25 +1,22 @@
-import { INCREMENT, LOGIN, SET_DASHBOARD, SHOW_PROFILE, SIGN_UP, USER_DETAIL, VIEW_USER } from "./types";
+import { LOGIN, SET_DASHBOARD, SET_DASHBOARD_FALSE, SHOW_PROFILE, SIGN_UP, USER_DETAIL, VIEW_USER } from "./types";
 
 const GlobalReducer = (state, action) => {
   switch (action.type) {
-    case INCREMENT: {
-      return {
-        ...state,
-        quantity: state.quantity + 1,
-      };
-    }
     case LOGIN: {
+      console.log('LOIGINN')
       return {
         ...state,
         login: !state.login,
+        signup: !state.signup,
         profile: false,
-        reader: false
+        reader: false,
+        // dashboard:true
       }
     }
     case SIGN_UP: {
       return {
         ...state,
-        login: !state.login,
+        login: false,
         profile: false,
         reader: false
       }
@@ -27,7 +24,15 @@ const GlobalReducer = (state, action) => {
     case SET_DASHBOARD: {
       return {
         ...state,
-        dashboard: !state.dashboard
+        // dashboard: !state.dashboard
+        dashboard: true
+      }
+    }
+    case SET_DASHBOARD_FALSE: {
+      return {
+        ...state,
+        // dashboard: !state.dashboard
+        dashboard: false
       }
     }
     case SHOW_PROFILE: {
@@ -37,6 +42,7 @@ const GlobalReducer = (state, action) => {
       }
     }
     case USER_DETAIL: {
+      localStorage.setItem('userDetail', JSON.stringify(action.payload))
       return {
         ...state,
         user: action.payload

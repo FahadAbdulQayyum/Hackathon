@@ -1,26 +1,27 @@
-import { INCREMENT, LOGIN, SET_DASHBOARD, SHOW_PROFILE, SIGN_UP, USER_DETAIL, VIEW_USER } from "./types";
-import { useReducer } from "react";
+import {LOGIN, SET_DASHBOARD, SET_DASHBOARD_FALSE, SHOW_PROFILE, SIGN_UP, USER_DETAIL, VIEW_USER } from "./types";
+import { useEffect, useReducer } from "react";
 import globalReducer from "./GlobalReducer";
 import globalContext from "./GlobalContext";
 
 const GlobalState = (props) => {
+  let storageData = 0;
+  useEffect(() => {
+    // storageData = JSON.parse(localStorage.getItem('userDetail'))
+    state.user = JSON.parse(localStorage.getItem('userDetail'))
+    console.log('storageData', storageData)
+  }, [])
   const initialState = {
-    quantity: 0,
     login: false,
+    signup:true,
     dashboard: false,
     showProfile: false,
-    user:null,
+    // user: storageData?.length ? storageData : null,
+    user: null,
     reader: true,
     viewFilteredUser: null,
   };
 
   const [state, dispatch] = useReducer(globalReducer, initialState);
-  //   const [state, dispatch] = useReducer(initialState, globalReducer);
-
-  const incrementation = () => {
-    console.log("incrementation pressed");
-    dispatch({ type: INCREMENT });
-  };
 
   const Login = () => {
     dispatch({
@@ -43,6 +44,13 @@ const GlobalState = (props) => {
     console.log('set_dashboard')
   }
 
+  const DashboardFalse = () => {
+    dispatch({
+      type: SET_DASHBOARD_FALSE
+    })
+    console.log('DashboardFalse')
+  }
+
   const showProfileFunc = () => {
     dispatch({
       type: SHOW_PROFILE
@@ -50,10 +58,10 @@ const GlobalState = (props) => {
     console.log('SHOW_PROFILE')
   }
 
-  const userDetail = data => {
+  const userDetail = (data, data1) => {
     dispatch({
       type: USER_DETAIL,
-      payload: data
+      payload: {...data, ...data1}
     })
     console.log('userDtail functino called')
   }
@@ -64,19 +72,19 @@ const GlobalState = (props) => {
       payload: data
     })
   }
-  
+
   return (
     <globalContext.Provider
       value={{
-        incrementation,
         Login,
         Dashboard,
         showProfileFunc,
         userDetail,
         Signup,
         viewFilteredUserFunc,
-        quantity: state.quantity,
+        DashboardFalse,
         login: state.login,
+        signup: state.signup,
         dashboard: state.dashboard,
         showProfile: state.showProfile,
         user: state.user,

@@ -7,7 +7,7 @@ const Reader = data => {
 
     const router = useRouter();
     
-    const { user, viewFilteredUserFunc } = useContext(globalContext)
+    const { user, viewFilteredUserFunc, Dashboard, Login,DashboardFalse } = useContext(globalContext)
 
     const [blogData, setBlogData] = useState([]);
     const [timeOfDay, setTimeOfDay] = useState();
@@ -19,6 +19,8 @@ const Reader = data => {
 
             console.log('daajon', dataJson.data)
             setBlogData(dataJson.data);
+            // Dashboard()
+            DashboardFalse()
         }
 
         const determineTimeOfDay = () => {

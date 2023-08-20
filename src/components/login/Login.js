@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import globalContext from '../contextApi/GlobalContext'
 import { message } from 'antd';
 import { useRouter } from 'next/router';
@@ -7,7 +7,7 @@ const Login = () => {
 
     const router = useRouter();
 
-    const { Dashboard, userDetail } = useContext(globalContext);
+    const { Dashboard, userDetail, user, Signup, DashboardFalse } = useContext(globalContext);
 
     const [isValidEmail, setIsValidEmail] = useState(false)
     const [emailV, setEmailV] = useState('')
@@ -15,10 +15,43 @@ const Login = () => {
     const emailRef = useRef();
     const passwordRef = useRef();
 
+
+    useEffect(() => {
+        emailRef.current.value = user?.email!==undefined ? user?.email : ""
+        passwordRef.current.value = user?.password!==undefined ?  user?.password : ""
+        console.log('login user if avaialbel',user);
+        DashboardFalse();
+        user!==null && onLogin()
+        // user && (message.loading(), onLogin(), Login())
+    },[])
+
     const emailValidFunc = () => {
         const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         setIsValidEmail(emailRegex.test(emailV))
         return isValidEmail;
+    }
+
+    const onLogin = async e => {
+        console.log('onLoginnn')
+        const formData = {
+            email: emailRef.current.value,
+            password: passwordRef.current.value,
+        };
+        const res = await fetch('/api/login', {
+            method: "POST",
+            body: JSON.stringify(formData),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        const jsonData = await res.json();
+        if (!jsonData.success) {
+            return message.error(jsonData.msg)
+        }
+        message.success(jsonData.msg)
+        router.push('/dashboardPage')
+        userDetail(jsonData.detail, formData)
+        Dashboard();
     }
 
     const handleSubmit = async e => {
@@ -41,7 +74,7 @@ const Login = () => {
         message.loading()
         message.success(jsonData.msg)
         router.push('/dashboardPage')
-        userDetail(jsonData.detail)
+        userDetail(jsonData.detail, formData)
         Dashboard();
     }
 
