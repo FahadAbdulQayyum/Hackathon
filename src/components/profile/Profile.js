@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { BsPencilFill } from 'react-icons/bs'
+import globalContext from '../contextApi/GlobalContext';
 
 const Profile = () => {
+
+    const {user} = useContext(globalContext);
+    
     return (
         <nav className="navbar navbar-expand-lg bg-white">
             <div className="container">
@@ -29,7 +33,7 @@ const Profile = () => {
                                 </div>
                                 <div className='ms-3 mt-5'>
                                     <div className='d-flex align-items-center text-item-center'>
-                                        <h4 className='me-3'>Inzamam Malik</h4>
+                                        <h4 className='me-3'>{user?.firstName + ' ' + user?.lastName }</h4>
                                         <BsPencilFill className='iconClr' size={18} />
                                     </div>
                                     <h4>Password</h4>
